@@ -3,7 +3,10 @@ Package.describe({
 });
 
 Package.on_use(function (api, where) {
-    api.add_files('forms.js', 'client' );
+    api.use('router', ['client', 'server']);
+    api.use(['templating'], 'client');
+    api.add_files(['client/forms.js','client/forms.html'], 'client' );
+    api.add_files('server/forms.js', 'server' );
 });
 
 Package.on_test(function (api) {
