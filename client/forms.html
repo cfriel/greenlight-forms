@@ -1,6 +1,22 @@
 <template name="forms_page">
-  {{#each databases}}
-  <div>{{name}}</div>
-  {{/each}}
+
+  <div class="span2">
+    <div>
+      {{#each databases}}
+      <div>
+	<span class="database-link"><a href="/forms/{{name}}">{{name}}</a></span>
+	<div>
+	  {{#each collections}}
+	  <div><span class="collection-link"><a href="/forms/{{name}}">{{name}}</a></span></div>
+	  {{/each}}
+	</div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+
+  <div class="span10">
+    {{>forms_data_browser}}
+  </div>
 
 </template>

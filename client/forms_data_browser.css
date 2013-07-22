@@ -1,0 +1,43 @@
+ul.data-list
+{
+   background: #F9F9F9;
+}
+
+ul.data-list li {
+    position: relative;
+    height: 24px;
+    line-height: 24px;
+    overflow: hidden; 
+    border-bottom: 1px solid #CCC;
+    margin: 0px;
+}
+
+ul.data-list  li div {
+    position: absolute;
+    top: 0px;
+}
+
+ul.data-list li .left {
+    left: 0;
+    width: 100px;
+    font-weight: bold;
+}
+
+ul.data-list li .right {
+    right: 0;
+}
+
+ul.data-list li .center {
+    left: 150px;
+    right: 100px;
+}
+
+ul.data-list li .right img {
+    height: 20px;
+    width: 20px;
+}
+
+ul.data-list li.selected
+{
+    background: #fff2a8;
+}
