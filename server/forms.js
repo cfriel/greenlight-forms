@@ -4,6 +4,10 @@ Meteor.startup(function () {
 
     Databases.remove({});
 
+    Meteor.publish("databases", function(){
+	return Databases.find();
+    });
+
     var mongo = Npm.require('mongodb');
     var Fiber = Npm.require('fibers');
     
@@ -26,7 +30,7 @@ Meteor.startup(function () {
 	    for(var i = 0; i < databases.length; i++){
 		
 		var databaseParam = databases[i];
-		console.log(databaseParam.name);
+		//console.log(databaseParam.name);
 
 		Fiber(function(database){
 		    
@@ -44,7 +48,7 @@ Meteor.startup(function () {
 		    
 		    database.collections = collections.result;
 		    
-		    console.log(database);
+		    //console.log(database);
 		    Databases.insert(database);
 		}).run(databaseParam);
 	    }
@@ -54,6 +58,12 @@ Meteor.startup(function () {
     Data = new Meteor.Collection("data");
 
     Data.remove();
+
+    Meteor.publish("data", function(){
+	return Data.find();
+    });
+
+    
     
 });
 

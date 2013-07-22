@@ -1,9 +1,19 @@
 Databases = new Meteor.Collection("databases");
 Data = new Meteor.Collection("data");
 
+Deps.autorun(function(){
+    Meteor.subscribe("data");
+    Meteor.subscribe("databases");    
+});
+
+
 Meteor.startup(function(){
 
     Data.remove();
+    
+    //$(document).ready(function() {
+    //$('#nav').append('<li><a href="/forms">Forms</a></li>');
+    //});
     
 });
 
@@ -11,9 +21,6 @@ Meteor.Router.add({
     '/forms': 'forms_page'
 });
 
-
-var databasesHandle = Meteor.subscribe('databases', function () {
-});
 
 Template.forms_page.databases = function () {
     return Databases.find({}, {sort: {name: 1}});
@@ -33,11 +40,11 @@ Deps.autorun(function(){
 
 	    var route = "/forms/" + database.name;
 
-	    console.log("Adding route " + route);
+	    // console.log("Adding route " + route);
 
 	    Routes[route] = function() 
 	    {
-		console.log(database.name);
+		// console.log(database.name);
 		return "forms_page";
 	    };
 
@@ -47,12 +54,12 @@ Deps.autorun(function(){
 
 		var name = database.collections[i].name;
 
-		console.log("Adding route " + subRoute);
+		// console.log("Adding route " + subRoute);
 
 		var f = function(name){
 		    return function()
 		    {
-			console.log(name);
+			// console.log(name);
 			Session.set("selected_collection", name);
 			
 			Meteor.call('refresh', Session.get("selected_collection"), 
