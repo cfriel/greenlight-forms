@@ -13,13 +13,30 @@ Meteor.startup(function(){
     
 });
 
-var navigateTo = function(name)
+var navigateToItem = function(collection, id)
 {
-    console.log("called navigateto with " + name);
+    console.log("called navigateto with " + collection + ", " + id);
 
-    if(name)
+    if(collection)
     {
-	Session.set("selected_collection", name);
+	Session.set("selected_collection", collection);
+	Session.set("selected_item", id);
+	
+	Meteor.call('refresh', Session.get("selected_collection"), 
+    		    function(err, result)
+    		    {
+    		    }
+    		   );
+    }
+}
+
+var navigateToCollection = function(collection)
+{
+    console.log("called navigateto with " + collection);
+
+    if(collection)
+    {
+	Session.set("selected_collection", collection);
 	
 	Meteor.call('refresh', Session.get("selected_collection"), 
     		    function(err, result)
@@ -30,9 +47,45 @@ var navigateTo = function(name)
 }
 
 Meteor.Router.add({
-    '/forms/:name?': function(name)
+    '/forms*': function(path)
     {
-	navigateTo(name);
+	if(path.length == 0)
+	{
+	}
+	else
+	{
+	    if(path.substring(0,1) == "/")
+	    {
+		path = path.substring(1, path.length);
+	    }
+
+	    var splits = path.split("/");
+
+	    if(splits.length == 1)
+	    {
+		var collection = splits[0];
+		
+		navigateToCollection(collection);
+	    }
+	    else if(splits.length == 2)
+	    {
+		var collection = splits[0];
+		var id = splits[1];
+
+		if(id == "")
+		{
+		    navigateToCollection(collection);
+		}
+		else
+		{
+		    navigateToItem(collection, id);
+		    
+		    return 'forms_item_page';
+		}
+	    }
+
+	}
+	
 	return 'forms_page';
     }
 });

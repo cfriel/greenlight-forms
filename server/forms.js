@@ -113,10 +113,11 @@ Meteor.methods({
 		else
 		{
 		    console.log("Inserting " + res.result.length + " records");
-		    console.log(res.result);
+		    //console.log(res.result);
 		    for(var i = 0; i < res.result.length; i++)
 		    {
 			res.result[i]._id = "" + res.result[i]._id;
+			console.log(res.result[i]._id);
 			Data.insert(res.result[i]);
 		    }
 		}
