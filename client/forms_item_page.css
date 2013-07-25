@@ -6,3 +6,23 @@
 .item-key-value
 {
 }
+
+.item-key-name-td
+{
+    font-weight: bold;
+}
+
+.item-key-value-td
+{
+    padding-left: 10px;
+}
+
+.item-key-value-edit
+{
+    display: none;
+}
+
+.item-key-value-tr
+{
+    /* height: 42px; */
+}

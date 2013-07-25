@@ -1,6 +1,27 @@
-Template.forms_item_page.databases = function () {
+Template.forms_item_page.rendered = function()
+{
+    var self = this;
+
+    $(".item-key-value").click(function(){
+	var td = $(this).parent();
+	$('.item-key-value-edit', td).show();
+	$('.item-key-value', td).hide();
+	$('.item-key-value-edit', td).focus();
+    });
+
+    $(".item-key-value-edit").blur(function(){
+	var td = $(this).parent();
+	$('.item-key-value-edit', td).hide();
+	$('.item-key-value', td).show();
+	$('.item-key-value', td).text($('.item-key-value-edit', td).val());
+	
+    });
+}
+
+Template.forms_item_page.databases = function () 
+{
     return Databases.find({}, {sort: {name: 1}});
-};
+}
 
 Template.forms_item_page.key = function()
 {
