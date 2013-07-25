@@ -21,6 +21,18 @@ Template.forms_item_page.keys = function()
     return keys;
 }
 
-Template.forms_item_page.items = function(){
-    return Data.find({_id : Session.get("selected_item")});
+Template.forms_item_page.items = function()
+{
+    var selectedId = Session.get("selected_id");
+
+    console.log("loading " + selectedId);
+
+    if(Data.find({_id : selectedId }).fetch().length != 0)
+    {
+	return Data.find({_id : selectedId });
+    }
+    else
+    {
+	return Data.find({_id : Meteor.Collection.ObjectID(selectedId) });
+    }
 }

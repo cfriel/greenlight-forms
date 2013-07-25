@@ -1,16 +1,25 @@
-Template.forms_data_browser.results = function () {
+Template.forms_data_browser.results = function () 
+{    
     Pagination.perPage(10);
-    Session.set("collection_list_page", 1);
-    Pagination.currentPage(Session.get("collection_list_page"));
- 
-    return Data.find({});
+
+    Session.set("data_browser_page", 1);
+    Pagination.currentPage(Session.get("data_browser_page"));
+
+    var collection = Session.get("selected_collection");
+
+    return Pagination.collection(Data.find({ _collection: collection }).fetch());
 }
 
 Template.forms_data_browser.pagination = function(){
+    
     Pagination.perPage(10);
-    Session.set("collection_list_page", 1);
-    Pagination.currentPage(Session.get("collection_list_page"));
-    var numRecords = Data.find({}).count();
+
+    Session.set("data_browser_page", 1);
+    Pagination.currentPage(Session.get("data_browser_page"));
+
+    var collection = Session.get("selected_collection");
+    
+    var numRecords = Data.find({_collection : collection}).count();
 
     if(numRecords != 0)
     {
