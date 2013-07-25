@@ -7,7 +7,9 @@ Deps.autorun(function(){
 });
 
 Meteor.startup(function(){
-    
+    // todo - don't need to clear these caches in general
+    Databases.remove();
+    Data.remove();
 });
 
 Template.forms_page.databases = function () {
