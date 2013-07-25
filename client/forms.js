@@ -13,6 +13,31 @@ Template.forms_page.databases = function () {
     return Databases.find({}, {sort: {name: 1}});
 };
 
+Template.forms_page.rendered = function()
+{
+    var select2 = $("#s").select2({
+        minimumInputLength: 1,
+
+        query: function (query) {
+
+            var data = {results: []}, i, j, s;
+
+	    var res = Data.find({ Surname : { $regex : query.term + ".*", $options: 'i' } }).fetch();
+
+            for (var i = 0; i < res.length; i++) {
+                data.results.push( {id: res[i]._id, text: res[i].Surname});
+            }
+
+            query.callback(data);
+        }
+    });
+
+    $('#s').on("change", function(e) { 
+	console.log("change "+JSON.stringify({val:e.val, added:e.added, removed:e.removed}));
+	window.location.href = e.val;
+    });
+}
+
 var ensureLoadDatabases = function()
 {
     var databasesLoaded = Session.get("databases_loaded");
