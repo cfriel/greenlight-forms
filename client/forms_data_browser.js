@@ -1,6 +1,6 @@
 Template.forms_data_browser.results = function () 
 {    
-    Pagination.perPage(10);
+    Pagination.perPage(50);
 
     Session.set("data_browser_page", 1);
     Pagination.currentPage(Session.get("data_browser_page"));
@@ -12,7 +12,7 @@ Template.forms_data_browser.results = function ()
 
 Template.forms_data_browser.pagination = function(){
     
-    Pagination.perPage(10);
+    Pagination.perPage(50);
 
     Session.set("data_browser_page", 1);
     Pagination.currentPage(Session.get("data_browser_page"));

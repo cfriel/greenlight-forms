@@ -1,21 +1,19 @@
 <template name="forms_item_page">
 
-  <div class="span2">
-    <div>
+  <div class="span3">
+    <ul id="left-navbar" class="nav nav-tabs nav-stacked">
       {{#each databases}}
-      <div>
-	<span class="database-link"><a href="/forms/{{name}}">{{name}}</a></span>
-	<div>
-	  {{#each collections}}
-	  <div><span class="collection-link"><a href="/forms/{{database}}/{{name}}/">{{name}}</a></span></div>
-	  {{/each}}
-	</div>
-      </div>
+      <li>
+	<a href="#" style="font-weight: bold;">{{name}}</a>
+      </li>
+      {{#each collections}}
+      <li><a href="/forms/{{database}}/{{name}}/">{{name}}</a></li>
       {{/each}}
-    </div>
+      {{/each}}
+    </ul>
   </div>
-
-  <div class="span10">
+  
+  <div class="span9">
 
     {{#each items}}
     
