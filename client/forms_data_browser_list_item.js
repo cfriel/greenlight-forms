@@ -8,7 +8,7 @@ Template.forms_data_browser_list_item.summary = function()
 
     for(var i = 0; i < keys.length; i++)
     {
-	res = res + "," + keys[i];
+	res = res + "," + self[keys[i]];
     }
 
     return res;

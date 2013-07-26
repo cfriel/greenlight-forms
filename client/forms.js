@@ -22,13 +22,36 @@ Template.forms_page.rendered = function()
 
             var data = {results: []}, i, j, s;
 
-	    var res = Data.find({ Surname : { $regex : query.term + ".*", $options: 'i' } }).fetch();
+	    var currentCollection = Session.get("selected_collection");
 
-            for (var i = 0; i < res.length; i++) {
-                data.results.push( {id: res[i]._id, text: res[i].Surname});
-            }
+	    var item = Data.findOne({ _collection : currentCollection });
 
-            query.callback(data);
+	    var count = 0;
+	    var limit = 10;
+
+	    if(item && query.term)
+	    {
+		var keys = Object.keys(item);
+		
+		for(var i = 0; i < keys.length; i++)
+		{
+		    if(count < limit)
+		    {
+			var q = {};
+			q[keys[i]] = { $regex : query.term + ".*", $options: 'i'}
+			q["_collection"] = currentCollection;
+			
+			var res = Data.find(q).fetch();
+			
+			for (var j = 0; j < res.length && count < limit; j++) {
+		     	    data.results.push( {id: res[j]._id, text: res[j][keys[i]]});
+			    count++;
+			}
+		    }
+		}
+		
+		query.callback(data);
+	    }
         }
     });
 
