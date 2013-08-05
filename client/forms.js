@@ -141,6 +141,18 @@ forms.prototype.routes = {
 
 };
 
+forms.prototype.default_route = {
+
+    '/' : function()
+    {
+	console.log("calling default route");
+
+	return 'forms_page';
+    }
+
+};
+
+
 Forms = forms.prototype;
 
 console.log("loading forms package");
