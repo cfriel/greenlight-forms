@@ -62,54 +62,58 @@ Template.forms_page.rendered = function()
     });
 }
 
-var ensureLoadDatabases = function()
-{
-    var databasesLoaded = Session.get("databases_loaded");
+// var ensureLoadDatabases = function()
+// {
+//     var databasesLoaded = Session.get("databases_loaded");
 
-    if(!databasesLoaded)
-    {
-	loadDatabases();
-    }
-}
+//     if(!databasesLoaded)
+//     {
+// 	loadDatabases();
+//     }
+// }
 
-var loadDatabases = function()
-{
-    Meteor.call('databases', function(err, result)
-		{
-		    if(err)
-		    {
-			console.log("Failed to load databases");
-		    }
-		    else
-		    {
-			Session.set("databases_loaded", true);
-		    }
-		});
+// var loadDatabases = function()
+// {
+//     Meteor.call('databases', function(err, result)
+// 		{
+// 		    if(err)
+// 		    {
+// 			console.log("Failed to load databases");
+// 		    }
+// 		    else
+// 		    {
+// 			Session.set("databases_loaded", true);
+// 		    }
+// 		});
     
-};
+// };
 
-var loadCollection = function(database, collection)
-{
-    Meteor.call('load', database, collection, {}, 0, 100, 
-		function(err, result)
-		{
-		});
-};
+// var loadCollection = function(database, collection)
+// {
+//     Meteor.call('load', database, collection, {}, 0, 100, 
+// 		function(err, result)
+// 		{
+// 		});
+// };
 
-var loadItem = function(database, collection, id)
-{
-    Meteor.call('item', database, collection, id, 
-		function(err, result)
-		{
-		});
-};
+// var loadItem = function(database, collection, id)
+// {
+//     Meteor.call('item', database, collection, id, 
+// 		function(err, result)
+// 		{
+// 		});
+// };
 
-Meteor.Router.add({
-    
+var name = "forms";
+var version = "1.0";
+
+forms = function(){};
+
+forms.prototype = new forms();
+
+forms.prototype.routes = {
     '/forms': function(path)
     {
-	//ensureLoadDatabases();
-
 	return 'forms_page';
     },
 
@@ -118,8 +122,7 @@ Meteor.Router.add({
 	Session.set('selected_database', database);
 	Session.set('selected_collection', collection);
 
-	//ensureLoadDatabases();
-	loadCollection(database, collection);
+	//loadCollection(database, collection);
 
 	return 'forms_page';
     },
@@ -130,10 +133,17 @@ Meteor.Router.add({
 	Session.set('selected_collection', collection);
 	Session.set('selected_id', id);
 
-	ensureLoadDatabases();
-	loadItem(database, collection, id);
+	//ensureLoadDatabases();
+	//loadItem(database, collection, id);
 
 	return 'forms_item_page';
     }
-    
-});
+
+};
+
+Forms = forms.prototype;
+
+console.log("loading forms package");
+
+Greenlight.register_template(name, version, Forms);
+
