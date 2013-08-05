@@ -42,13 +42,14 @@ Template.forms_page.rendered = function()
 			q["_collection"] = currentCollection;
 			
 			var res = Data.find(q).fetch();
-			
+		    
 			for (var j = 0; j < res.length && count < limit; j++) {
 		     	    data.results.push( {id: res[j]._id, text: res[j][keys[i]]});
 			    count++;
 			}
 		    }
 		}
+
 		
 		query.callback(data);
 	    }
@@ -107,7 +108,7 @@ Meteor.Router.add({
     
     '/forms': function(path)
     {
-	ensureLoadDatabases();
+	//ensureLoadDatabases();
 
 	return 'forms_page';
     },
@@ -117,7 +118,7 @@ Meteor.Router.add({
 	Session.set('selected_database', database);
 	Session.set('selected_collection', collection);
 
-	ensureLoadDatabases();
+	//ensureLoadDatabases();
 	loadCollection(database, collection);
 
 	return 'forms_page';
