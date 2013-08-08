@@ -1,6 +1,6 @@
 <template name="forms_item_page">
 
-  <div class="span3">
+  <div class="col-lg-3">
     <ul id="left-navbar" class="nav nav-tabs nav-stacked">
       {{#each databases}}
       <li>
@@ -13,7 +13,7 @@
     </ul>
   </div>
   
-  <div class="span9">
+  <div class="col-lg-9">
 
     {{#each items}}
     
@@ -27,7 +27,7 @@
       </td>
       <td class="item-key-value-td">
 	<span class="item-key-value">{{value}}</span>
-	<input type="text" class="item-key-value-edit" style="display:none;" value="{{value}}"/>
+	<input type="text" class="form-control item-key-value-edit" style="display:none;" value="{{value}}"/>
       </td>
     </tr>
 

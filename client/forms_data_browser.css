@@ -20,7 +20,7 @@ ul.data-list  li div {
 
 ul.data-list li .left {
     left: 0;
-    width: 200px;
+    width: 250px;
     font-weight: bold;
 }
 
@@ -29,7 +29,7 @@ ul.data-list li .right {
 }
 
 ul.data-list li .center {
-    left: 200px;
+    left: 250px;
     right: 100px;
 }
 
