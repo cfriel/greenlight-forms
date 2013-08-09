@@ -109,7 +109,7 @@ var version = "1.0";
 
 forms = function(){};
 
-forms.prototype = new forms();
+forms.prototype = new Greenlight.Package();
 
 forms.prototype.routes = {
     '/forms': function(path)
