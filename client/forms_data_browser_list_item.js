@@ -12,6 +12,9 @@ Template.forms_data_browser_list_item.summary = function()
     }
 
     return res;
+};
 
-
-}
+Template.forms_data_browser_list_item.dataset = function()
+{
+    return Session.get("forms_dataset");
+};

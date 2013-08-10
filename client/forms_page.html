@@ -2,13 +2,10 @@
 
   <div class="col-lg-3">
     <ul id="left-navbar" class="nav nav-tabs nav-stacked">
-      {{#each databases}}
+      {{#each datasets}}
       <li>
-	<a href="#" style="font-weight: bold;">{{name}}</a>
+	<a href="{{root}}/{{name}}" >{{name}}</a>
       </li>
-	  {{#each collections}}
-	  <li><a href="/forms/{{database}}/{{name}}/">{{name}}</a></li>
-	  {{/each}}
       {{/each}}
     </ul>
   </div>

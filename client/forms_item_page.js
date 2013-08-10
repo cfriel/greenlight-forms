@@ -16,11 +16,18 @@ Template.forms_item_page.rendered = function()
 	$('.item-key-value', td).text($('.item-key-value-edit', td).val());
 	
     });
-}
+};
 
-Template.forms_item_page.databases = function () 
+Template.forms_item_page.root = function()
 {
-    return Databases.find({}, {sort: {name: 1}});
+    return "/forms";
+};
+
+
+
+Template.forms_item_page.datasets = function () 
+{
+    return Greenlight.Dataset.Datasets.find({}, {sort: {name: 1}});
 }
 
 Template.forms_item_page.key = function()
@@ -44,7 +51,7 @@ Template.forms_item_page.keys = function()
 
 Template.forms_item_page.items = function()
 {
-    var selectedId = Session.get("selected_id");
+    var selectedId = Session.get("forms_id");
 
     console.log("loading " + selectedId);
 

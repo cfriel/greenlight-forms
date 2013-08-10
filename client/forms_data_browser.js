@@ -5,9 +5,16 @@ Template.forms_data_browser.results = function ()
     Session.set("data_browser_page", 1);
     Pagination.currentPage(Session.get("data_browser_page"));
 
-    var collection = Session.get("selected_collection");
-
-    return Pagination.collection(Data.find({ _collection: collection }).fetch());
+    var datasetName = Session.get("forms_dataset");
+    
+    var dataset = Greenlight.Dataset.Datasets.findOne({name: datasetName});
+    
+    if(dataset)
+    {    
+	var collection = dataset.collection;	
+	
+	return Pagination.collection(Data.find({ _collection: collection }).fetch());
+    }
 }
 
 Template.forms_data_browser.pagination = function(){
@@ -17,17 +24,19 @@ Template.forms_data_browser.pagination = function(){
     Session.set("data_browser_page", 1);
     Pagination.currentPage(Session.get("data_browser_page"));
 
-    var collection = Session.get("selected_collection");
+    var datasetName = Session.get("forms_dataset");
     
-    var numRecords = Data.find({_collection : collection}).count();
+    var dataset = Greenlight.Dataset.Datasets.findOne({name: datasetName});
+    
+    if(dataset)
+    {    
+	var collection = dataset.collection;
 
-    if(numRecords != 0)
-    {
-	return Pagination.links("/create/collection", numRecords);
+	var numRecords = Data.find({_collection : collection}).count();
+
+	if(numRecords != 0)
+	{
+	    return Pagination.links("/create/collection", numRecords);
+	}
     }
-}
-
-Template.forms_data_browser.selected_collection = function()
-{
-    return Session.get("selected_collection");
 }
