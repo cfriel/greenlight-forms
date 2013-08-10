@@ -14,13 +14,13 @@ forms.prototype.metadata = function()
 }();
 
 
-Greenlight.Forms = forms.prototype;
+Greenlight.Packages.Forms = forms.prototype;
 
 Meteor.startup(function () {
 
     console.log("loading forms package");
     
-    Greenlight.register_template(name, version, Greenlight.Forms);    
+    Greenlight.register_template(name, version, Greenlight.Packages.Forms);    
 
 });
 

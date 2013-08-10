@@ -60,9 +60,9 @@ forms.prototype.default_route = {
 };
 
 
-Forms = forms.prototype;
+Greenlight.Packages.Forms = forms.prototype;
 
 console.log("loading forms package");
 
-Greenlight.register_template(name, version, Forms);
+Greenlight.register_template(name, version, Greenlight.Packages.Forms);
 
