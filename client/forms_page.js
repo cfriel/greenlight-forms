@@ -1,5 +1,5 @@
 Template.forms_page.datasets = function () {
-    return Greenlight.Dataset.Datasets.find({}, {sort: {name: 1}});
+    return Greenlight.Datasets.find({}, {sort: {name: 1}});
 };
 
 Template.forms_page.root = function()
@@ -15,7 +15,7 @@ Deps.autorun(function(){
 
     var datasetName = Session.get("forms_dataset");
     
-    var dataset = Greenlight.Dataset.Datasets.findOne({name: datasetName});
+    var dataset = Greenlight.Datasets.findOne({name: datasetName});
     
     if(dataset)
     {

@@ -27,7 +27,7 @@ Template.forms_item_page.root = function()
 
 Template.forms_item_page.datasets = function () 
 {
-    return Greenlight.Dataset.Datasets.find({}, {sort: {name: 1}});
+    return Greenlight.Datasets.find({}, {sort: {name: 1}});
 }
 
 Template.forms_item_page.key = function()

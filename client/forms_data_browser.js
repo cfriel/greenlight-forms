@@ -7,7 +7,7 @@ Template.forms_data_browser.results = function ()
 
     var datasetName = Session.get("forms_dataset");
     
-    var dataset = Greenlight.Dataset.Datasets.findOne({name: datasetName});
+    var dataset = Greenlight.Datasets.findOne({name: datasetName});
     
     if(dataset)
     {    
@@ -26,7 +26,7 @@ Template.forms_data_browser.pagination = function(){
 
     var datasetName = Session.get("forms_dataset");
     
-    var dataset = Greenlight.Dataset.Datasets.findOne({name: datasetName});
+    var dataset = Greenlight.Datasets.findOne({name: datasetName});
     
     if(dataset)
     {    

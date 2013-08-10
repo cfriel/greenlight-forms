@@ -62,7 +62,10 @@ forms.prototype.default_route = {
 
 Greenlight.Packages.Forms = forms.prototype;
 
-console.log("loading forms package");
+Meteor.startup(function(){
 
-Greenlight.register_template(name, version, Greenlight.Packages.Forms);
+    console.log("loading forms package");
+    
+    Greenlight.register_template(name, version, Greenlight.Packages.Forms);
 
+});
