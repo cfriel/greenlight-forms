@@ -1,0 +1,23 @@
+<template name="forms_page">
+
+  <div class="col-lg-3">
+    <ul id="left-navbar" class="nav nav-tabs nav-stacked">
+      {{#each databases}}
+      <li>
+	<a href="#" style="font-weight: bold;">{{name}}</a>
+      </li>
+	  {{#each collections}}
+	  <li><a href="/forms/{{database}}/{{name}}/">{{name}}</a></li>
+	  {{/each}}
+      {{/each}}
+    </ul>
+  </div>
+
+  <div class="col-lg-9">
+
+    <div><input type="hidden" id="s" style="width: 100%;"/></div>
+
+    {{>forms_data_browser}}
+  </div>
+
+</template>

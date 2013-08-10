@@ -62,48 +62,6 @@ Template.forms_page.rendered = function()
     });
 }
 
-// var ensureLoadDatabases = function()
-// {
-//     var databasesLoaded = Session.get("databases_loaded");
-
-//     if(!databasesLoaded)
-//     {
-// 	loadDatabases();
-//     }
-// }
-
-// var loadDatabases = function()
-// {
-//     Meteor.call('databases', function(err, result)
-// 		{
-// 		    if(err)
-// 		    {
-// 			console.log("Failed to load databases");
-// 		    }
-// 		    else
-// 		    {
-// 			Session.set("databases_loaded", true);
-// 		    }
-// 		});
-    
-// };
-
-// var loadCollection = function(database, collection)
-// {
-//     Meteor.call('load', database, collection, {}, 0, 100, 
-// 		function(err, result)
-// 		{
-// 		});
-// };
-
-// var loadItem = function(database, collection, id)
-// {
-//     Meteor.call('item', database, collection, id, 
-// 		function(err, result)
-// 		{
-// 		});
-// };
-
 var name = "forms";
 var version = "1.0";
 
@@ -112,6 +70,7 @@ forms = function(){};
 forms.prototype = new Greenlight.Package();
 
 forms.prototype.routes = {
+
     '/forms': function(path)
     {
 	return 'forms_page';
