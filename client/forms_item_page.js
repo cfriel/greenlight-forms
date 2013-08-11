@@ -36,7 +36,12 @@ Template.forms_item_page.root = function()
 
 Template.forms_item_page.datasets = function () 
 {
-    return Greenlight.Datasets.find({}, {sort: {name: 1}});
+    var site = Session.get('site');
+
+    if(site)
+    {
+	return Greenlight.Datasets.find({_id : {$in : site.collections}}, {sort: {name: 1}});
+    }
 }
 
 Template.forms_item_page.key = function()
