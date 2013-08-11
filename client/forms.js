@@ -9,13 +9,11 @@ Deps.autorun(function(){
 Meteor.startup(function(){
 });
 
-
 var name = "forms";
 var version = "1.0";
 
 forms = function(obj)
 {
-    console.log("foo");
     if(obj)
     {
 	this.init(obj);
@@ -24,37 +22,6 @@ forms = function(obj)
 
 forms.prototype = new Greenlight.Package();
 forms.prototype.constructor = forms;
-
-forms.prototype.routes = {
-
-    '/forms': function(path)
-    {
-	return 'forms_page';
-    },
-
-    '/forms/:dataset' : function(dataset)
-    {
-	Session.set('forms_dataset', dataset);
-
-	var dataset = Greenlight.Dataset.findOne({ name: dataset });
-
-	if(dataset)
-	{
-	    Greenlight.Dataset.load(dataset);
-	}
-
-	return 'forms_page';
-    },
-
-    '/forms/:dataset/:id' : function(dataset, id)
-    {
-	Session.set('forms_dataset', dataset);
-	Session.set('forms_id', id);
-
-	return 'forms_item_page';
-    }
-
-};
 
 forms.prototype.instantiate = function(site)
 {    
@@ -106,18 +73,6 @@ forms.prototype.instantiate = function(site)
 	Meteor.Router.add(siteRoutes);
     }
 };
-
-forms.prototype.default_route = {
-
-    '/' : function()
-    {
-	console.log("calling default route");
-
-	return 'forms_page';
-    }
-
-};
-
 
 Greenlight.Packages.Forms = forms.prototype;
 

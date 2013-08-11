@@ -20,7 +20,16 @@ Template.forms_item_page.rendered = function()
 
 Template.forms_item_page.root = function()
 {
-    return "/forms";
+   var site = Session.get('site');
+    
+    if(site)
+    {
+	return '/'+site.url;
+    }
+    else
+    {
+	return "/forms";
+    }
 };
 
 

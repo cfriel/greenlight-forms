@@ -8,7 +8,7 @@ Template.forms_page.root = function()
     
     if(site)
     {
-	return site.url;
+	return '/'+site.url;
     }
     else
     {
