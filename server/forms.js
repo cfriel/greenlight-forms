@@ -20,7 +20,7 @@ Meteor.startup(function () {
 
     console.log("loading forms package");
     
-    Greenlight.register_template(name, version, Greenlight.Packages.Forms);    
+    Greenlight.register_package(name, version, Greenlight.Packages.Forms);    
 
 });
 

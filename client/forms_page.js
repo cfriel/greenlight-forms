@@ -4,7 +4,16 @@ Template.forms_page.datasets = function () {
 
 Template.forms_page.root = function()
 {
-    return "/forms";
+    var site = Session.get('site');
+    
+    if(site)
+    {
+	return site.url;
+    }
+    else
+    {
+	return "/forms";
+    }
 };
 
 Template.forms_page.rendered = function()
