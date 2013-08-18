@@ -1,13 +1,3 @@
-Databases = new Meteor.Collection("databases");
-Data = new Meteor.Collection("data");
-
-Deps.autorun(function(){
-    Meteor.subscribe("data");
-    Meteor.subscribe("databases");    
-});
-
-Meteor.startup(function(){
-});
 
 var name = "forms";
 var version = "1.0";
