@@ -23,17 +23,18 @@ Template.forms_page.root = function()
 
 Template.forms_page.rendered = function()
 {
-};
-
-Deps.autorun(function(){
-
     var datasetName = Session.get("forms_dataset");
     
     var dataset = Greenlight.Datasets.findOne({name: datasetName});
     
     if(dataset)
-    {
-    
+    {    
+	bindSearch(dataset);
+    }    
+};
+
+var bindSearch = function(dataset)
+{
 	var currentCollection = dataset.collection;
 	
 	var item = Data.findOne({ _collection : currentCollection });
@@ -59,12 +60,14 @@ Deps.autorun(function(){
 			{
 			    var q = {};
 			    q[keys[i]] = { $regex : query.term + ".*", $options: 'i'}
+			    var site = Session.get('site');
 			    q["_collection"] = currentCollection;
 			    
 			    var res = Data.find(q).fetch();
-			    
+			    var url = "/" + site.url + "/" + currentCollection + "/";
+
 			    for (var j = 0; j < res.length && count < limit; j++) {
-		     		data.results.push( {id: res[j]._id, text: res[j][keys[i]]});
+		     		data.results.push( {id: url + res[j]._id, text: res[j][keys[i]]});
 				count++;
 			    }
 			}
@@ -78,7 +81,18 @@ Deps.autorun(function(){
 	
 	$('#s').on("change", function(e) { 
 	    console.log("change "+JSON.stringify({val:e.val, added:e.added, removed:e.removed}));
-	    window.location.href = e.val;
+	    Meteor.Router.to(e.val);
 	});
+};
+
+Deps.autorun(function(){
+
+    var datasetName = Session.get("forms_dataset");
+    
+    var dataset = Greenlight.Datasets.findOne({name: datasetName});
+    
+    if(dataset)
+    {    
+	bindSearch(dataset);
     }
 });
