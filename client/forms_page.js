@@ -35,54 +35,53 @@ Template.forms_page.rendered = function()
 
 var bindSearch = function(dataset)
 {
-	var currentCollection = dataset.collection;
-	
-	var item = Data.findOne({ _collection : currentCollection });
+    var currentCollection = dataset.collection;
+    
+    var item = Data.findOne({ _collection : currentCollection });
+    
+    var select2 = $("#s").select2({
+        minimumInputLength: 1,
 
-	var select2 = $("#s").select2({
-            minimumInputLength: 1,
-
-            query: function (query) {
-
-		var data = {results: []}, i, j, s;
-
-
-		var count = 0;
-		var limit = 10;
-
-		if(item && query.term)
+        query: function (query) {
+	    
+	    var data = {results: []}, i, j, s;
+	    
+	    var count = 0;
+	    var limit = 10;
+	    
+	    if(item && query.term)
+	    {
+		var keys = Object.keys(item);
+		
+		for(var i = 0; i < keys.length; i++)
 		{
-		    var keys = Object.keys(item);
-		    
-		    for(var i = 0; i < keys.length; i++)
+		    if(count < limit)
 		    {
-			if(count < limit)
-			{
-			    var q = {};
-			    q[keys[i]] = { $regex : query.term + ".*", $options: 'i'}
-			    var site = Session.get('site');
-			    q["_collection"] = currentCollection;
-			    
-			    var res = Data.find(q).fetch();
-			    var url = "/" + site.url + "/" + currentCollection + "/";
-
-			    for (var j = 0; j < res.length && count < limit; j++) {
-		     		data.results.push( {id: url + res[j]._id, text: res[j][keys[i]]});
-				count++;
-			    }
+			var q = {};
+			q[keys[i]] = { $regex : query.term + ".*", $options: 'i'}
+			var site = Session.get('site');
+			q["_collection"] = currentCollection;
+			
+			var res = Data.find(q).fetch();
+			var url = "/" + site.url + "/" + currentCollection + "/";
+			
+			for (var j = 0; j < res.length && count < limit; j++) {
+		     	    data.results.push( {id: url + res[j]._id, text: res[j][keys[i]]});
+			    count++;
 			}
 		    }
-
-		    
-		    query.callback(data);
 		}
-            }
-	});
-	
-	$('#s').on("change", function(e) { 
-	    console.log("change "+JSON.stringify({val:e.val, added:e.added, removed:e.removed}));
-	    Meteor.Router.to(e.val);
-	});
+		
+		
+		query.callback(data);
+	    }
+        }
+    });
+    
+    $('#s').on("change", function(e) { 
+	console.log("change "+JSON.stringify({val:e.val, added:e.added, removed:e.removed}));
+	Meteor.Router.to(e.val);
+    });
 };
 
 Deps.autorun(function(){
